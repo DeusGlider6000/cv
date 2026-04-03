@@ -86,22 +86,26 @@
     /* ── HERO ── */
     #hero {
       min-height:100vh;
-      display:flex; align-items:center;
-      padding:60px 0 100px; border-top:none;
+      display:flex; flex-direction:column;
+      padding:0 0 100px; border-top:none;
     }
-    #hero .wrap { width:100%; }
+    #hero > .wrap {
+      flex:1; width:100%;
+      display:flex; align-items:center;
+    }
 
-    /* Floating hashtag cloud above name */
+    /* Floating hashtag cloud — overlaid on panorama */
     .hero-tagcloud {
-      height: 54px;
-      position: relative;
-      margin-bottom: 20px;
-      overflow: visible;
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 0; right: 0;
+      overflow: hidden;
+      z-index: 3;
     }
     .hero-tagcloud .htag {
       position: absolute;
       font-family: 'Space Mono', monospace;
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: 0.08em;
       color: var(--cyan);
       opacity: 0;
@@ -161,7 +165,7 @@
     .hero-meta {
       font-family:'Space Mono',monospace; font-size:11px;
       color:var(--text-dim); letter-spacing:0.07em;
-      line-height:2.2; margin-bottom:16px;
+      line-height:2.2; margin-bottom:4px;
     }
     .hero-meta .row { display:flex; align-items:center; gap:10px; }
     .hero-meta .row::before {
@@ -177,7 +181,7 @@
       padding:10px 14px;
       border:1px solid var(--border);
       border-left:2px solid var(--amber);
-      margin-bottom:16px;
+      margin-bottom:2px;
     }
     .hero-nonetwork span { color:var(--amber); }
 
@@ -290,6 +294,8 @@
     /* ── PANORAMA BANNER ── */
     .panorama-banner {
       position: relative;
+      width: 100%;
+      flex-shrink: 0;
     }
     .panorama-banner img {
       width: 100%;
@@ -517,11 +523,14 @@
 
   <!-- ── HERO ── -->
   <section id="hero">
-    <div class="wrap">
 
-      <!-- floating hashtag cloud — populated by JS -->
+    <!-- Panorama direkt unter Statusbar, Hashtag-Animation darüber -->
+    <div class="panorama-banner">
+      <img src="Luzern Resilienz 72.png" alt="Luzern — Gebäudeautomation trifft Resilienz" loading="lazy">
       <div class="hero-tagcloud" id="hero-tagcloud"></div>
+    </div>
 
+    <div class="wrap">
       <div class="hero-main">
         <div class="hero-text">
           <h1 class="hero-name">PETER<br><span>BÜHLER</span></h1>
@@ -534,11 +543,11 @@
             <div class="row">Elektrotechniker HF · dipl. NDS HF Betriebswirtschaft · Luzern · Schweiz</div>
           </div>
 
-          <div class="hero-nonetwork" style="margin-top:16px">
+          <div class="hero-nonetwork" style="margin-top:4px">
             <span>// INFO:</span> Kein LinkedIn · Kein Xing · Direkter Kontakt bevorzugt
           </div>
 
-          <div class="hero-contact">
+          <div class="hero-contact" style="margin-top:2px">
             Luzern · Schweiz &nbsp;·&nbsp; <a href="mailto:buhlepech@pm.me">buhlepech@pm.me</a>
           </div>
         </div>
@@ -666,13 +675,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ── PANORAMA ── -->
-  <div class="wrap">
-    <div class="panorama-banner">
-      <img src="Luzern Resilienz 72.png" alt="Luzern — Gebäudeautomation trifft Resilienz" loading="lazy">
-    </div>
-  </div>
 
   <!-- ── PROJEKTE ── -->
   <section id="projekte">
