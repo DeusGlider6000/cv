@@ -129,25 +129,25 @@
       animation: htag-float 11s ease-in-out infinite;
     }
     .htag-svg svg { display:block; }
-    .ga-spin  { animation: ga-spin  2.6s linear infinite;
+    .ga-spin  { animation: ga-spin  7s linear infinite;
                 transform-origin: 50% 50%; transform-box: fill-box; }
-    .ga-spin-s{ animation: ga-spin  4s   linear infinite;
+    .ga-spin-s{ animation: ga-spin  10s  linear infinite;
                 transform-origin: 50% 50%; transform-box: fill-box; }
-    .ga-needle{ animation: ga-needle 2.8s ease-in-out infinite alternate;
+    .ga-needle{ animation: ga-needle 5s ease-in-out infinite alternate;
                 transform-origin: 50% 100%; transform-box: fill-box; }
-    .ga-blink { animation: ga-blink 0.9s step-end infinite; }
-    .ga-dash  { animation: ga-dash  1.6s linear infinite; }
-    .ga-pulse { animation: ga-pulse 1.8s ease-in-out infinite;
+    .ga-blink { animation: ga-blink 2.4s ease-in-out infinite; }
+    .ga-dash  { animation: ga-dash  4s linear infinite; }
+    .ga-pulse { animation: ga-pulse 4s ease-in-out infinite;
                 transform-origin: 50% 50%; transform-box: fill-box; }
-    .ga-w1    { animation: ga-wave  2s ease-out infinite; }
-    .ga-w2    { animation: ga-wave  2s ease-out 0.65s infinite; }
-    .ga-w3    { animation: ga-wave  2s ease-out 1.3s  infinite; }
-    .ga-flow  { animation: ga-flow  2s linear infinite; }
-    .ga-tog   { animation: ga-tog   2.4s ease-in-out infinite alternate; }
+    .ga-w1    { animation: ga-wave  3.5s ease-out infinite; }
+    .ga-w2    { animation: ga-wave  3.5s ease-out 1.15s infinite; }
+    .ga-w3    { animation: ga-wave  3.5s ease-out 2.3s  infinite; }
+    .ga-flow  { animation: ga-flow  4s linear infinite; }
+    .ga-tog   { animation: ga-tog   5s ease-in-out infinite alternate; }
     @keyframes ga-spin   { to   { transform: rotate(360deg); } }
     @keyframes ga-needle { from { transform: rotate(-32deg); }
                            to   { transform: rotate(32deg);  } }
-    @keyframes ga-blink  { 0%,49%{opacity:1} 50%,100%{opacity:0.1} }
+    @keyframes ga-blink  { 0%,100%{opacity:1} 50%{opacity:0.1} }
     @keyframes ga-dash   { from { stroke-dashoffset: 48; } to { stroke-dashoffset: 0; } }
     @keyframes ga-pulse  { 0%,100%{transform:scale(0.85);opacity:0.3}
                            50%   {transform:scale(1.15);opacity:1} }
@@ -1109,14 +1109,24 @@ const ALL_TAGS = [
     {left:'14%',  top:'45%'}, {left:'46%', top:'88%'}, {left:'55%', top:'45%'},
     {left:'68%',  top:'90%'}, {left:'88%', top:'5%'}
   ];
+  function randTag() {
+    return { left: (Math.random() * 88 + 2).toFixed(1) + '%',
+             top:  (Math.random() * 42 + 3).toFixed(1) + '%' }; // obere Hälfte
+  }
   heroTags.forEach((tag, i) => {
+    const pos = randTag();
     const el = document.createElement('span');
     el.className = 'htag';
     el.textContent = '#' + tag;
-    el.style.left = positions[i].left;
-    el.style.top  = positions[i].top;
+    el.style.left = pos.left;
+    el.style.top  = pos.top;
     el.style.animationDelay = (i * 0.55) + 's';
     el.style.animationDuration = (6 + (i % 5)) + 's';
+    el.addEventListener('animationiteration', () => {
+      const p = randTag();
+      el.style.left = p.left;
+      el.style.top  = p.top;
+    });
     container.appendChild(el);
   });
 })();
@@ -1242,7 +1252,7 @@ const ALL_TAGS = [
   // Shuffle positions randomly on each load
   function randPos() {
     return { left: (Math.random() * 88 + 2).toFixed(1) + '%',
-             top:  (Math.random() * 80 + 5).toFixed(1) + '%' };
+             top:  (Math.random() * 40 + 52).toFixed(1) + '%' }; // untere Hälfte
   }
 
   icons.forEach(ic => {
