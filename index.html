@@ -287,6 +287,35 @@
     }
     .kpi-desc { font-size:12px; color:var(--text-dim); line-height:1.45; }
 
+    /* ── PANORAMA BANNER ── */
+    .panorama-banner {
+      position: relative;
+      width: 100%;
+      height: clamp(220px, 30vw, 420px);
+      overflow: hidden;
+    }
+    .panorama-banner img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+    }
+    .panorama-banner::before,
+    .panorama-banner::after {
+      content: '';
+      position: absolute; left: 0; right: 0; z-index: 2;
+      height: 80px;
+      pointer-events: none;
+    }
+    .panorama-banner::before {
+      top: 0;
+      background: linear-gradient(to bottom, var(--bg), transparent);
+    }
+    .panorama-banner::after {
+      bottom: 0;
+      background: linear-gradient(to top, var(--bg), transparent);
+    }
+
     /* ── PROJEKTE ── */
     .proj-scroll { overflow-x:auto; }
     .proj-table { width:100%; border-collapse:collapse; font-size:13px; }
@@ -614,14 +643,14 @@
           <div class="kpi-desc">GA-Anlagen gemacht oder geleitet, schweizweit</div>
         </div>
         <div class="kpi-card anim">
-          <div class="kpi-val" data-target="20">0</div>
-          <div class="kpi-unit">Jahre Planung</div>
-          <div class="kpi-desc">Integrale GA-Planung auf Bauherrenseite</div>
-        </div>
-        <div class="kpi-card anim">
           <div class="kpi-val" data-target="30">0</div>
           <div class="kpi-unit">Jahre</div>
           <div class="kpi-desc">Gebäudeautomation, jede Stufe selbst durchlaufen</div>
+        </div>
+        <div class="kpi-card anim">
+          <div class="kpi-val" data-target="20">0</div>
+          <div class="kpi-unit">Jahre Planung</div>
+          <div class="kpi-desc">Integrale GA-Planung auf Bauherrenseite</div>
         </div>
         <div class="kpi-card anim">
           <div class="kpi-val" data-target="14">0</div>
@@ -641,6 +670,11 @@
       </div>
     </div>
   </section>
+
+  <!-- ── PANORAMA ── -->
+  <div class="panorama-banner">
+    <img src="Luzern Resilienz 72.png" alt="Luzern — Gebäudeautomation trifft Resilienz" loading="lazy">
+  </div>
 
   <!-- ── PROJEKTE ── -->
   <section id="projekte">
@@ -974,26 +1008,38 @@
 <script>
 // ── ALL HASHTAGS (exact from source) ──
 const ALL_TAGS = [
-  'Gebäudeautomation','MSRL','Bauherrenvertretung','Systeme','Funktionen','Vernetzung',
-  'TechnischerKoordinator','Konzeptplanung','SIA108','BACnet','KNX','DESIGO','DesigoCC',
-  'DesigoInsight','DesigoPX','VISONIK','UNIGYR','LON','Colbas','BACnetIP','BACnetMSTP',
-  'LONworks','BuildingAutomation','Gebäudetechnik','Spitalbau','LUKSGruppe','Haustechnik',
-  'Systemintegration','SmartBuilding','SmartHospital','Luzern','Zentralschweiz','Schweiz',
-  'KBOB','Normenarbeit','Fachplaner','SeniorPlanerGA','GAPlaner','Bauherrschaft',
-  'Energiemonitoring','Energieoptimierung','Energiemanagement','HLKKSE','HLKKS',
-  'Raumautomation','Leitsysteme','Feldebene','Automationsebene','Managementebene',
-  'IBN','Inbetriebnahme','1000Inbetriebnahmen','QSMandat','IntegralePlanung','Multivender',
-  'Systemarchitektur','Planungsingenieur','TGAPlaner','TGA','FacilityManagement','pbFM',
-  'Standardisierung','Beschaffung','Ausschreibung','Submission','Kältetechnik','Lüftung',
-  'Heizung','Sanitär','Elektro','Sicherheitstechnik','klassifizierteAnlagen','Militärbau',
-  'Armasuisse','RUAG','Hotel','Industrie','Infrastruktur','Modernisierung','Migration',
-  'Erneuerung','Neubau','Umbau','Grossbauprojekt','Komplexbau','Regeltechnik','DDC','SPS',
-  'Beckhoff','Sauter','Siemens','LandisStaefa','GA','GAKonzept','GAStrategie','Konzeptplaner',
-  'Systemdenker','360GradSicht','GebäudeautomationExperte','30JahreErfahrung','VonGrundAuf',
-  'Projektleiter','SeniorProjectManager','TechnischeKoordination','KKLLuzern','ETHZurich',
-  'Burgenstock','DolderGrand','PostWankdorf','FlugplatzEmmen','MainTower','Spitalneubau',
-  'Kitesurfen','Wingfoilen','Windsurfen','Skifahren','MotorradOffroad','Funsport',
-  'Klavier','Gitarre','KI','Technologie','Systemdenken'
+  'GebäudeautomationExperte','Systemdenker','IntegralePlanung','TechnischerKoordinator',
+  '360GradSicht','Bauherrenvertretung','Bauherrschaft','Konzeptplanung','Konzeptplaner',
+  'SeniorPlanerGA','GAPlaner','Planungsingenieur','TGAPlaner','TGA','SeniorProjectManager',
+  'Projektleiter','TechnischeKoordination','QSMandat','Normenarbeit','SIA108','KBOB',
+  'Fachplaner','VonGrundAuf','VerstehenVereinfachenHandeln','GA','GAKonzept','GAStrategie',
+  'MSRL','Systemarchitektur','Systemintegration','Resilienz','Betriebssicherheit',
+  'Ausfallsicherheit','Notfallplanung','Notbetrieb','Notfallkonzept','Redundanz','USV',
+  'Backup','Diversifikation','BusinessContinuity','Risikomanagement','Risikoanalyse',
+  'Grossbauprojekt','Komplexbau','Neubau','Umbau','Modernisierung','Migration','Erneuerung',
+  'IBN','Inbetriebnahme','Inbetriebsetzung','Commissioning','Regeltechnik','Feldebene',
+  'Automationsebene','Managementebene','Raumautomation','Leitsysteme','DDC','SPS',
+  'BACnet','BACnetIP','BACnetMSTP','BACnetSecure','KNX','LON','LONworks','DESIGO',
+  'DesigoCC','DesigoInsight','DesigoPX','VISONIK','UNIGYR','Colbas','Beckhoff','Sauter',
+  'Siemens','LandisStaefa','SmartBuilding','SmartHospital','SmartHome','IoT','BIM',
+  'BigData','Blockchain','LoRaWan','BLE','NAS','Bitchat','Meshtastic','PV','Eigenproduktion',
+  'IT','EDV','KI','Technologie','Vernetzung','Kommunikation','Engineering','Consulting',
+  'Beratung','Planung','Technik','Innovation','Digitalisierung','Automatisierung',
+  'Nachhaltigkeit','Energiewende','Klimaschutz','Infrastruktur','Sicherheit','Leadership',
+  'Projektmanagement','Qualität','Erfahrung','Expertise','Weiterbildung','Netzwerk',
+  'Schweiz','Swiss','MadeinSwitzerland','Zukunft','Transformation','FacilityManagement',
+  'pbFM','HLKKSE','HLKKS','Kältetechnik','Lüftung','Heizung','Sanitär','Elektro',
+  'Sicherheitstechnik','klassifizierteAnlagen','Spitalbau','Militärbau','Armasuisse',
+  'RUAG','Hotel','Industrie','Gebäudetechnik','Haustechnik','Energieeffizienz',
+  'Energiemanagement','Energiemonitoring','Energieoptimierung','Lifecycle',
+  'Betriebsoptimierung','Instandhaltung','Wartung','Dokumentation','DigitalerZwilling',
+  'Prozessoptimierung','Schnittstellen','Protokolle','OPC','MQTT','Datenpunkte',
+  'Alarmanagement','Trendanalyse','Visualisierung','HMI','SCADA','Gebäudemanagement',
+  'Betriebsführung','Lebenszykluskosten','Swissengineering','Baukoordination',
+  'Fehleranalyse','Troubleshooting','Abnahme','Qualitätssicherung','Qualitätsmanagement',
+  'Testing','Retrofit','Bestandsanlagen','Sanierung','Brandschutz','Zutrittskontrolle',
+  'Videoüberwachung','EMS','CTS','GLT','Gebäudeleittechnik','MSR','Messtechnik','Sensorik',
+  'Aktorik','Feldgeräte','Kalibrierung','Regelkreis','PID','Kaskadenregelung'
 ];
 
 // ── HASHTAG CLOUD (bottom section) ──
